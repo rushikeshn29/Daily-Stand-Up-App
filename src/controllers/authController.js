@@ -16,7 +16,6 @@ const userRegistration = async (req, res) => {
         teamLead,
         contact,
         password,
-        confirmpassword,
         profileImage,
     } = req.body;
 

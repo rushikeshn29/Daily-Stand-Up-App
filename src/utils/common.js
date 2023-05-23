@@ -1,7 +1,6 @@
 // Structure for response
 export class APIResponse {
-  constructor(statusCode, status, message = '', data = '') {
-    this.statusCode = statusCode,
+  constructor( status, message = '', data = '') {
       this.status = status,
       this.message = message,
       this.data = data
