@@ -9,14 +9,14 @@ import { __dirname } from "../app.js";
 const userRegistration = async (req, res) => {
 
     const {
-        name,
+        firstName,
+        lastName,
         email,
         employeeId,
         department,
         teamLead,
         contact,
         password,
-        profileImage,
     } = req.body;
 
 
@@ -32,12 +32,13 @@ const userRegistration = async (req, res) => {
             try {
                 let doc;
                 if (req.file) {
-                    const file = req.file;
+                    // const file = req.file;
                     const url = `http://localhost:8000/${req.file.filename}`;
                     const salt = await bcrypt.genSalt(10);
                     const hashPassword = await bcrypt.hash(password, salt);
                     doc = new userModel({
-                        name: name,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
                         employeeId: employeeId,
                         department: department,
@@ -50,7 +51,8 @@ const userRegistration = async (req, res) => {
                     const salt = await bcrypt.genSalt(10);
                     const hashPassword = await bcrypt.hash(password, salt);
                     doc = new userModel({
-                        name: name,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
                         employeeId: employeeId,
                         department: department,

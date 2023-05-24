@@ -22,7 +22,8 @@ const seedData = async () => {
       const salt = await bcrypt.genSalt(10)
       const password = await bcrypt.hash('Admin#123', salt)
       const adminData = {
-        name: 'Admin',
+        firstName: 'User',
+        lastName: 'Admin',
         email: 'admin@yopmail.com',
         employeeId: '10102',
         department: 'JavaScript',

@@ -6,12 +6,12 @@ import chalk from 'chalk';
 import seedData from './config/adminMigration.js';
 import connectDB from './config/config.js';
 import authRoutes from './routes/authRoute.js';
+import userRoute from './routes/userRoute.js';
 
 dotenv.config({ path: '../.env' });
 
 const app = express();
 const port = process.env.PORT
-
 
 // CORS Policy
 app.use(cors())
@@ -20,7 +20,7 @@ app.use(cors())
 //Path
 export const __dirname = path.resolve()
 
-app.use(express.static('./client'));
+app.use(express.static('./uploads'));
 
 // Database Connection
 await seedData();
@@ -31,7 +31,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Load Routes
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoute);
 
 
 app.listen(port, () => {

@@ -13,7 +13,7 @@ export const validationCheck = (req, res, next) => {
 //Rules for Auth Module
 export const authRules = {
     SignUp: [
-        check("userName").isLength({min:4}).isAlphanumeric().withMessage("User Name is required"),
+        check("userName").isLength({ min: 4 }).isAlphanumeric().withMessage("User Name is required"),
         check("email").isEmail().withMessage("Valid Email required"),
         check("password").isLength({ min: 6 }).withMessage("Password must be at least 6 character long"),
     ],

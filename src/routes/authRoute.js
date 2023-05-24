@@ -9,5 +9,4 @@ export default [
     // Public Routes
     router.post('/register', upload.single('profileImage'), userRegistration),
     router.post('/login', userLogin),
-    // router.post('/login', [authRules.login, validationCheck, userLogin]),
 ]
