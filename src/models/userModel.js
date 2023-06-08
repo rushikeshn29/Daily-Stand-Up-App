@@ -1,30 +1,36 @@
 import mongoose from "mongoose";
 
-// User Schema
-
 const userSchema = new mongoose.Schema(
     {
-        name: {
+        firstName: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        lastName: {
             type: String,
             required: true,
             trim: true,
         },
         email: {
+            unique: true,
             type: String,
             required: true,
             trim: true,
+            lowercase: true,
         },
         employeeId: {
             type: Number,
-            required: true
+            required: true,
+            unique: true,
         },
         department: {
             type: String,
             required: true,
             trim: true,
         },
-        teamLead: {
-            type: String,
+        teamLeadId: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
         contact: {
@@ -35,15 +41,15 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
+            minlength: 8,
         },
         profileImage: {
             type: String,
         },
-
     },
     { timestamps: true }
 );
 
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("User", userSchema);
 
 export default userModel;

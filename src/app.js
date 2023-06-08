@@ -7,15 +7,12 @@ import seedData from './config/adminMigration.js';
 import connectDB from './config/config.js';
 import authRoutes from './routes/authRoute.js';
 import userRoute from './routes/userRoute.js';
-
 dotenv.config({ path: '../.env' });
-
 const app = express();
-const port = process.env.PORT
 
+const port = process.env.PORT;
 // CORS Policy
 app.use(cors())
-
 
 //Path
 export const __dirname = path.resolve()

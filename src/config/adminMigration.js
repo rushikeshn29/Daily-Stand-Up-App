@@ -2,49 +2,47 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userModel from '../models/userModel.js';
-dotenv.config();
+dotenv.config({ path: '../.env' });
 mongoose.set('strictQuery', false);
 
 // Mongoose Seeder for Admin Registration
-
 const seedData = async () => {
   try {
-    const uri = process.env.DATABASE_URL;
+    const { ADMIN_EMAIL, ADMIN_PASS, DATABASE_URL, SALT, DATABASE_NAME } = process.env;
     const dbOptions = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: process.env.DATABASE_NAME //Database name
+      dbName: DATABASE_NAME,
     };
-    await mongoose.connect(uri, dbOptions)
-    let connClosed = false
-    const userData = await userModel.findOne({ email: 'admin@yopmail.com' })
+    await mongoose.connect(DATABASE_URL, dbOptions);
+    let connClosed = false;
+    const userData = await userModel.findOne({ email: ADMIN_EMAIL }).lean();
     if (!userData) {
-      const salt = await bcrypt.genSalt(10)
-      const password = await bcrypt.hash('Admin#123', salt)
+      const salt = await bcrypt.genSalt(+SALT);
+      const password = await bcrypt.hash(ADMIN_PASS, salt);
       const adminData = {
         firstName: 'User',
         lastName: 'Admin',
-        email: 'admin@yopmail.com',
-        employeeId: '10102',
+        email: ADMIN_EMAIL,
+        employeeId: '00000',
         department: 'JavaScript',
-        teamLead: 'NA',
-        contact: '7777777777',
+        teamLeadId: '6421367e888a4143fae6964e',
+        contact: '8256763304',
         password,
         profileImage: 'https://cdn.pixabay.com/photo/2015/09/16/08/55/online-942408_960_720.jpg'
-
       }
-      const res = await new userModel(adminData).save()
+      const res = await new userModel(adminData).save();
       if (res) {
-        connClosed = true
+        connClosed = true;
       }
     } else {
-      connClosed = true
+      connClosed = true;
     }
     if (connClosed) {
-      mongoose.connection.close()
+      mongoose.connection.close();
     }
   } catch (error) {
-    console.log('error:', error)
+    console.log(error.message);
   }
 }
 export default seedData;

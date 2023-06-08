@@ -6,3 +6,4 @@ export class APIResponse {
       this.data = data
   }
 }
+
