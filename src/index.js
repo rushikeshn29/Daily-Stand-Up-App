@@ -1,13 +1,14 @@
-import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import chalk from 'chalk';
-import seedData from './config/adminMigration.js';
+import dotenv from 'dotenv';
+import express from 'express';
 import connectDB from './config/config.js';
-import authRoutes from './routes/authRoute.js';
 import userRoute from './routes/userRoute.js';
-dotenv.config({ path: '../.env' });
+import authRoutes from './routes/authRoute.js';
+import seedData from './config/adminMigration.js';
+dotenv.config({ path: "./src/.env" });
+
 const app = express();
 
 const port = process.env.PORT;
@@ -17,7 +18,7 @@ app.use(cors())
 //Path
 export const __dirname = path.resolve()
 
-app.use(express.static('./uploads'));
+app.use(express.static('./src/uploads'));
 
 // Database Connection
 await seedData();

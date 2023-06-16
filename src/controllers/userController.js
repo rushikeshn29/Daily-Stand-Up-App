@@ -7,14 +7,13 @@ import { PRESENT } from "../utils/constant.js";
 
 export const addUserUpdates = async (req, res) => {
     try {
-
         const { id1, id2 } = req.params;
         const { attendance, workingStatus, workingOnClientName, workingFrom, updates } = req.body;
         const doc = new reportModel({
             userId: id1,
             teamLeadId: id2,
             attendance: attendance,
-            workingStatus: workingStatus + "-" + workingOnClientName,
+            workingStatus: workingOnClientName ? workingStatus + "-" + workingOnClientName : workingStatus,
             workingFrom: workingFrom,
             updates: updates
         });
@@ -23,7 +22,6 @@ export const addUserUpdates = async (req, res) => {
             res.status(201).send(new APIResponse(1, "Updates added successfully...", addUpdates));
         }
     } catch (error) {
-        console.log(error);
         res.status(400).send(new APIResponse(0, "Error adding updates..."));
     }
 }
@@ -63,7 +61,7 @@ export const deleteUserUpdates = async (req, res) => {
 
 export const getUserUpdates = async (req, res) => {
     try {
-        const id = req.parms.id;
+        const id = req.params.id;
         let start = new Date();
         start.setHours(0, 0, 0, 0);
         let end = new Date();
@@ -149,10 +147,11 @@ export const exportFileData = async (req, res) => {
         let end = new Date();
         end.setHours(23, 59, 59, 999);
         const data = await reportModel.find({
+            teamLeadId: id,
             createdAt: {
                 $gte: start, $lt: end
             }
-        }).populate("userId").lean();
+        }).populate("userId")
         const daysPresent = await reportModel.aggregate([
             {
                 $match: {
@@ -163,24 +162,24 @@ export const exportFileData = async (req, res) => {
             {
                 $group: { _id: "$userId", count: { $sum: 1 } }
             },
-        ]).lean();
+        ])
 
         if (data && daysPresent) {
             const newData = data.map((elements) => {
                 var result = daysPresent.filter(obj => String(obj._id) == elements.userId._id)
                 return {
+                    userId:elements.userId._id,
                     firstName: elements.userId.firstName,
                     lastName: elements.userId.lastName,
                     email: elements.userId.email,
                     department: elements.userId.department,
                     daysPresentInCall: result.length > 0 ? result[0].count : 0,
-                    teamLead: elements.userId.teamLead,
-                    workingFrom: elements.userId.workingFrom,
-                    workingStatus: elements.userId.workingStatus,
+                    workingFrom: elements.workingFrom,
+                    workingStatus: elements.workingStatus,
                     contact: elements.userId.contact,
                     attendance: elements.attendance,
-                    status: elements.status,
                     updates: elements.updates,
+                    updateId:elements._id,
                     createdAt: elements.createdAt,
                 }
             })

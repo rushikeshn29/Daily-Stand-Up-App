@@ -5,7 +5,7 @@ import { loginSchema, registrationSchema } from "../validations/authValidation.j
 
 export async function auth(req, res, next) {
     try {
-
+    
         const { authorization } = req.headers;
         const token = authorization.split(" ")[1];
         if (!token) {
@@ -15,7 +15,7 @@ export async function auth(req, res, next) {
             next();
         }
     } catch (err) {
-        res.send(new APIResponse(0, "Invalid User"));
+        res.status(401).send(new APIResponse(0, "Invalid User"));
     }
 }
 

@@ -1,13 +1,16 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config({ path: '../../.env' });
+import { __dirname } from "../index.js";
 import userModel from "../models/userModel.js";
 import { APIResponse } from "../utils/common.js";
-import { __dirname } from "../app.js";
-dotenv.config({ path: '../../.env' });
+import { DEFAULT_TL_ID } from "../utils/constant.js";
+
 
 // user Registration
 const userRegistration = async (req, res) => {
+
     const {
         firstName,
         lastName,
@@ -22,7 +25,7 @@ const userRegistration = async (req, res) => {
 
     const user = await userModel.findOne({ email: email }).lean();
     if (user) {
-        res.status(400).send(new APIResponse(0, "Email already exists"));
+        res.status(200).send(new APIResponse(0, "Email already exists"));
     }
     else {
         if (password == confirmpassword) {
@@ -79,7 +82,7 @@ const userLogin = async (req, res) => {
             const matchPassword = await bcrypt.compare(password, user.password);
             if ((user.email === email) && matchPassword) {
                 const token = jwt.sign(
-                    { userID: user._id, email: user.email, firstName: user.firstName, image: user.profileImage },
+                    { userID: user._id, Tl: user.teamLeadId, email: user.email, firstName: user.firstName, image: user.profileImage },
                     process.env.JWT_SECRET_KEY,
                     { expiresIn: "1d" }
                 );
@@ -97,5 +100,16 @@ const userLogin = async (req, res) => {
 };
 
 
-export { userRegistration, userLogin };
+const getTeamLead = async (req, res) => {
+    try {
+        const userData = await userModel.find({ teamLeadId: DEFAULT_TL_ID }).lean();
+        if (userData) {
+            res.status(200).send(new APIResponse(1, "Data found...", userData));
+        }
+    } catch (error) {
+        res.status(400).send(new APIResponse(0, "Error fetching Records..."));
+    }
+}
+
+export { userRegistration, userLogin, getTeamLead };
 

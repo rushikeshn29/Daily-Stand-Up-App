@@ -9,7 +9,6 @@ const reportSchema = new mongoose.Schema({
     },
     teamLeadId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
     },
     attendance: {
         type: String,
@@ -18,7 +17,6 @@ const reportSchema = new mongoose.Schema({
     },
     workingStatus: {
         type: String,
-        required: true,
     },
     workingFrom: {
         type: String,
@@ -27,7 +25,6 @@ const reportSchema = new mongoose.Schema({
     },
     updates: {
         type: String,
-        required: true,
         trim: true,
     }
 }, { timestamps: true });

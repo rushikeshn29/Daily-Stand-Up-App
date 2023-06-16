@@ -18,5 +18,5 @@ export const registrationSchema = Joi.object({
 
 export const loginSchema = Joi.object({
     email: Joi.string().email().lowercase().min(5).max(45).required(),
-    password: Joi.string().pattern(RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$')).required(),
+    password: Joi.string().required(),
 })

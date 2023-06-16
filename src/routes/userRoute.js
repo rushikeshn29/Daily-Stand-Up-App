@@ -6,8 +6,8 @@ import { validateUserUpdates } from '../middlewares/user.js';
 
 export default [
     // Private Routes
-    router.post('/addUpdates/:id1/:id2', auth, validateUserUpdates, addUserUpdates),
-    router.put('/updateUpdates/:id', auth, validateUserUpdates, updateUserUpdates),
+    router.post('/addUpdates/:id1/:id2', auth,  addUserUpdates),
+    router.put('/updateUpdates/:id', auth,  updateUserUpdates),
     router.delete('/deleteUpdates/:id', auth, deleteUserUpdates),
     router.get('/getUserData/:id', auth, getUserUpdates),
     router.get('/getEmployees/:id', auth, getEmployeesOfTL),

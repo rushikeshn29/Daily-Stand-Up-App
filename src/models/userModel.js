@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema(
         },
         teamLeadId: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
         },
         contact: {
             type: Number,
