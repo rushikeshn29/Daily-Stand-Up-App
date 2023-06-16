@@ -1,0 +1,36 @@
+/* Sign In css */
+.loginmaindiv {
+  background-image: url(../../public/Neosoft.jpg) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.mainSignIn {
+  height: 100vh;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Sign Up Css */
+
+.mainSignUp {
+  height: 100vh;
+}
+
+.registermaindiv {
+  background-image: url(../../public/Neosoft.jpg) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.registerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
