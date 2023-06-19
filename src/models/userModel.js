@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema(
         },
         department: {
             type: String,
-            required: true,
             trim: true,
+            required: true
         },
         teamLeadId: {
             type: mongoose.Schema.Types.ObjectId,

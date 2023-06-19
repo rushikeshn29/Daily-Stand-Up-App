@@ -6,7 +6,7 @@ export const registrationSchema = Joi.object({
     lastName: Joi.string().min(3).max(20).required(),
     email: Joi.string().email().lowercase().min(5).max(45).required(),
     employeeId: Joi.number().integer().min(1000).max(99999999).required(),
-    department: Joi.string().min(4).max(45).required(),
+    department: Joi.string().hex().length(24),
     teamLeadId: Joi.string().hex().length(24),
     contact: Joi.number().integer().min(10 ** 9).max(10 ** 10 - 1).required().messages({
         'number.min': 'Contact number should be 10 digit.',

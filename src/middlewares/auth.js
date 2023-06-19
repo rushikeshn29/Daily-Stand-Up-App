@@ -5,7 +5,7 @@ import { loginSchema, registrationSchema } from "../validations/authValidation.j
 
 export async function auth(req, res, next) {
     try {
-    
+
         const { authorization } = req.headers;
         const token = authorization.split(" ")[1];
         if (!token) {

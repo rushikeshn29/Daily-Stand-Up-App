@@ -29,7 +29,6 @@ const reportSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-
 const reportModel = mongoose.model("Report", reportSchema);
 
 export default reportModel;
