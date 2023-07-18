@@ -7,9 +7,7 @@ const departmentSchema = new mongoose.Schema({
         trim: true,
     },
     teamLeadId: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-        }
+        { type: mongoose.Schema.Types.ObjectId }
     ]
 
 }, { timestamps: true });

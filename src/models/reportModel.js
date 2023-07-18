@@ -26,8 +26,19 @@ const reportSchema = new mongoose.Schema({
     updates: {
         type: String,
         trim: true,
+    },
+
+    fromDate: {
+        type: Date,
+    },
+    toDate: {
+        type: Date,
+    },
+    reviewDate: {
+        type: Date,
     }
 }, { timestamps: true });
+
 
 const reportModel = mongoose.model("Report", reportSchema);
 

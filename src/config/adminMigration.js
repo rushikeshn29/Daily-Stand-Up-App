@@ -26,7 +26,8 @@ const seedData = async () => {
         email: ADMIN_EMAIL,
         employeeId: '00000',
         department: 'JavaScript',
-        contact: '1234567890',
+        teamLeadId: '6421367e888a4143fae6964e',
+        contact: '8256763304',
         password,
         profileImage: 'https://cdn.pixabay.com/photo/2015/09/16/08/55/online-942408_960_720.jpg'
       }

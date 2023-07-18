@@ -6,12 +6,17 @@ export const registrationSchema = Joi.object({
     lastName: Joi.string().min(3).max(20).required(),
     email: Joi.string().email().lowercase().min(5).max(45).required(),
     employeeId: Joi.number().integer().min(1000).max(99999999).required(),
-    department: Joi.string().hex().length(24),
+    department: Joi.string().hex().length(24).required(),
     teamLeadId: Joi.string().hex().length(24),
-    contact: Joi.number().integer().min(10 ** 9).max(10 ** 10 - 1).required().messages({
-        'number.min': 'Contact number should be 10 digit.',
-        'number.max': 'Contact number should be 10 digit'
-    }),
+    // contact: Joi.number().integer().min(10 * 9).max(10 * 10 - 1).required().messages({
+    //     'number.min': 'Contact number should be 10 digit.',
+    //     'number.max': 'Contact number should be 10 digit'
+    // }),
+    // contact: Joi.number().min(10).max(10).required(),
+    contact: Joi.string()
+        .length(10)
+        .pattern(/^[6-9]\d{9}$/)
+        .required(),
     password: Joi.string().pattern(RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$')).required(),
     confirmpassword: Joi.ref('password'),
 });

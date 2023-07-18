@@ -6,6 +6,7 @@ import { loginSchema, registrationSchema } from "../validations/authValidation.j
 export async function auth(req, res, next) {
     try {
 
+
         const { authorization } = req.headers;
         const token = authorization.split(" ")[1];
         if (!token) {
@@ -15,7 +16,7 @@ export async function auth(req, res, next) {
             next();
         }
     } catch (err) {
-        res.status(401).send(new APIResponse(0, "Invalid User"));
+        res.send(new APIResponse(0, "Invalid User"));
     }
 }
 
@@ -24,6 +25,7 @@ export async function validateUserRegistration(req, res, next) {
         const data = req.body;
         const validationResult = registrationSchema.validate(data);
         if (validationResult.error) {
+         
             return res.send(new APIResponse(0, validationResult.error.message));
         }
         else {

@@ -19,7 +19,7 @@ const fileFilter = (req, file, cb) => {
             cb(null, false);
         }
     } catch (error) {
-        console.log("In Error Block", error)
+        console.log("Multer error: ", error)
     }
 }
 
