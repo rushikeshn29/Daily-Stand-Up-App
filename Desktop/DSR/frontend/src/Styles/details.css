@@ -1,0 +1,62 @@
+/* .............Employee Form ............ */
+
+.employeeFormcard {
+  margin-top: 50px;
+  padding: 30px;
+  /* height: 520px; */
+}
+
+.errorMsg {
+  color: red;
+  font-size: 12px;
+}
+
+.confirmText {
+  margin: 10px 0;
+  color: green;
+}
+
+/* ...............Employee Table ................ */
+.employeeupdatetable {
+  margin-top: 50px;
+}
+
+.tableRow {
+  background-color: black;
+}
+
+.tableCell {
+  color: white !important;
+}
+
+.nodataFound {
+  font-size: 15px;
+  color: black;
+}
+
+/* ..............Profile Card........... */
+
+.userprofilecard {
+  margin-top: 50px;
+  height: 390px;
+  background: linear-gradient(to right, #f3e7e7, #ffffff);
+}
+
+.avtarcard {
+  display: flex;
+  justify-content: center;
+}
+
+.avtarDiv {
+  width: 130px !important;
+  height: 130px !important;
+  margin-bottom: 10px;
+}
+
+.profiletext {
+  margin-bottom: 20px;
+}
+
+.cardText {
+  margin-bottom: 20px !important;
+}
